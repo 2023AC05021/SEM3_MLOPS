@@ -1,4 +1,5 @@
-```graph TD
+```mermaid
+    graph TD
     A[Developer] -->|Push Code| B[GitHub Repository]
     B --> C[GitHub Actions CI/CD]
     
