@@ -1,78 +1,78 @@
-\## Phase 4: CI/CD Pipeline Automation
+## Phase 4: CI/CD Pipeline Automation
 
 
 
-\### Overview
+### Overview
 
 This folder contains GitHub Actions workflows for continuous integration, continuous deployment, code quality checks, and automated testing pipelines.
 
 
 
-\### Implementation Steps
+### Implementation Steps
 
 
 
-\#### Step 1: CI Pipeline Setup
+#### Step 1: CI Pipeline Setup
 
-\- Create GitHub Actions workflow for continuous integration
+- Create GitHub Actions workflow for continuous integration
 
-\- Set up Python environment with dependency caching
+- Set up Python environment with dependency caching
 
-\- Configure code quality checks with Black and Flake8
+- Configure code quality checks with Black and Flake8
 
-\- Implement automated linting and formatting validation
+- Implement automated linting and formatting validation
 
 
 
-\#### Step 2: Build Automation
+#### Step 2: Build Automation
 
-\- Create Docker image build automation workflow
+- Create Docker image build automation workflow
 
-\- Set up multi-architecture builds for different deployment targets
+- Set up multi-architecture builds for different deployment targets
 
-\- Implement build caching and optimization strategies (optional)
+- Implement build caching and optimization strategies (optional)
 
-\- Configure automated vulnerability scanning for containers (optional)
+- Configure automated vulnerability scanning for containers (optional)
 
 &nbsp;
 
-\#### Step 3: Deployment Pipeline
+#### Step 3: Deployment Pipeline
 
-\- Develop automated deployment workflow for EC2/LocalStack
+- Develop automated deployment workflow for EC2/LocalStack
 
-\- Create deployment scripts for different environments (dev/staging/prod)
+- Create deployment scripts for different environments (dev/staging/prod)
 
-\- Implement blue-green deployment strategy for zero-downtime updates
+- Implement blue-green deployment strategy for zero-downtime updates
 
-\- Set up deployment rollback mechanisms and health checks
-
-
-
-\#### Step 4: Integration with External Services
-
-\- Integrate with Docker Hub for automated image pushes
-
-\- Set up AWS credentials and deployment permissions
-
-\- Configure MLflow integration for model deployment tracking
-
-\- Implement notification systems for deployment status (optional)
+- Set up deployment rollback mechanisms and health checks
 
 
 
-\#### Step 5: Pipeline Optimization and Monitoring
+#### Step 4: Integration with External Services
 
-\- Optimize pipeline execution times and resource usage (optional)
+- Integrate with Docker Hub for automated image pushes
 
-\- Set up pipeline monitoring and failure alerting
+- Set up AWS credentials and deployment permissions
 
-\- Create deployment analytics and reporting
+- Configure MLflow integration for model deployment tracking
 
-\- Implement automated rollback triggers based on health checks
+- Implement notification systems for deployment status (optional)
 
 
 
-\### Folder Structure
+#### Step 5: Pipeline Optimization and Monitoring
+
+- Optimize pipeline execution times and resource usage (optional)
+
+- Set up pipeline monitoring and failure alerting
+
+- Create deployment analytics and reporting
+
+- Implement automated rollback triggers based on health checks
+
+
+
+### Folder Structure
 
 ```
 
@@ -96,57 +96,57 @@ This folder contains GitHub Actions workflows for continuous integration, contin
 
 
 
-\### Integration Points
+### Integration Points
 
 
 
-\#### From Previous Phase (API Development):
+#### From Previous Phase (API Development):
 
-\- Use Dockerfile and docker-compose configurations from API folder
+- Use Dockerfile and docker-compose configurations from API folder
 
-\- Integrate with FastAPI health check endpoints for deployment validation
+- Integrate with FastAPI health check endpoints for deployment validation
 
-\- Access container registry configurations for automated pushes
+- Access container registry configurations for automated pushes
 
-\- Utilize API testing scripts for deployment verification
-
-
-
-\#### To Next Phase (Monitoring):
-
-\- Trigger monitoring setup after successful deployments
-
-\- Provide deployment metadata for monitoring dashboards
-
-\- Set up integration with Prometheus for deployment metrics
-
-\- Ensure monitoring services are configured during deployment
+- Utilize API testing scripts for deployment verification
 
 
 
-\### Deliverables
+#### To Next Phase (Monitoring):
 
-\- Automated CI pipeline with code quality gates
+- Trigger monitoring setup after successful deployments
 
-\- Docker image build and registry push automation
+- Provide deployment metadata for monitoring dashboards
 
-\- Deployment pipeline for multiple environments
+- Set up integration with Prometheus for deployment metrics
 
-\- Automated health checks and rollback mechanisms
-
-\- Comprehensive deployment monitoring and alerting
+- Ensure monitoring services are configured during deployment
 
 
 
-\### Dependencies
+### Deliverables
 
-\- GitHub Actions
+- Automated CI pipeline with code quality gates
 
-\- Docker Hub
+- Docker image build and registry push automation
 
-\- AWS CLI
+- Deployment pipeline for multiple environments
 
-\- Shell scripting
+- Automated health checks and rollback mechanisms
 
-\- YAML configuration
+- Comprehensive deployment monitoring and alerting
+
+
+
+### Dependencies
+
+- GitHub Actions
+
+- Docker Hub
+
+- AWS CLI
+
+- Shell scripting
+
+- YAML configuration
 
