@@ -23,7 +23,7 @@
     O -->|AWS EC2| P[Production Environment]
     O -->|Local| Q[LocalStack]
     
-    L -->|Prediction API| R[/predict Endpoint]
+    L -->|Prediction API| R[predict Endpoint]
     R -->|JSON Input/Output| S[Model Inference]
     
     S -->|Log Requests| T[SQLite Database]
