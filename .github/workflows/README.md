@@ -80,17 +80,17 @@ This folder contains GitHub Actions workflows for continuous integration, contin
 
 └── workflows/
 
-&nbsp;   ├── ci.yml              # Continuous integration pipeline
+   ├── ci.yml              # Continuous integration pipeline
 
-&nbsp;   ├── cd.yml              # Continuous deployment pipeline
+   ├── cd.yml              # Continuous deployment pipeline
 
-&nbsp;   ├── docker-build.yml    # Docker image build and push
+   ├── docker-build.yml    # Docker image build and push
 
-&nbsp;   ├── deploy-staging.yml  # Staging environment deployment
+   ├── deploy-staging.yml  # Staging environment deployment
 
-&nbsp;   ├── deploy-prod.yml     # Production environment deployment
+   ├── deploy-prod.yml     # Production environment deployment
 
-&nbsp;   └── cleanup.yml         # Resource cleanup and maintenance
+   └── cleanup.yml         # Resource cleanup and maintenance
 
 ```
 
