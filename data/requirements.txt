@@ -1,0 +1,7 @@
+pandas
+setuptools
+scikit-learn
+dvc
+dvc[all]
+matplot
+seaborn
