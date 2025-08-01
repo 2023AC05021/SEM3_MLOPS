@@ -4,3 +4,16 @@ dvc_remote/
 data/notebooks/.ipynb_checkpoints
 data/processed
 data/raw
+
+# MLflow tracking and artifacts
+mlflow.db
+mlruns/
+models/
+.mlflow/
+
+# MLflow server logs
+mlflow-server.log
+*.mlflow
+
+src/utils/__init__.py
+src/utils/__pycache__/
