@@ -39,3 +39,48 @@ stages:
       hash: md5
       md5: 2b137ef75859795624e26014f916ae2c
       size: 1958974
+  feature_engineering:
+    cmd: python scripts/03_feature_engineering.py --input-path 
+      raw/california_housing_raw.csv --output-path 
+      interim/features_engineered.csv
+    deps:
+    - path: raw/california_housing_raw.csv
+      hash: md5
+      md5: bf428968a64b413a1b004b9a77e7c765
+      size: 2028521
+    - path: scripts/03_feature_engineering.py
+      hash: md5
+      md5: 328211e345926c8597f149eb754ec34c
+      size: 7021
+    outs:
+    - path: interim/features_engineered.csv
+      hash: md5
+      md5: 33ef420f881ca3546101baf993c74d5c
+      size: 2448073
+  split_data:
+    cmd: python scripts/04_split_data.py --input-path 
+      interim/features_engineered.csv --output-dir processed --test-size 0.2 
+      --random-state 42 --stratify
+    deps:
+    - path: interim/features_engineered.csv
+      hash: md5
+      md5: 33ef420f881ca3546101baf993c74d5c
+      size: 2448073
+    - path: scripts/04_split_data.py
+      hash: md5
+      md5: dcedd69856306c514238c9050144fcf6
+      size: 9639
+    params:
+      params.yaml:
+        preprocess.random_state: 42
+        preprocess.stratify: false
+        preprocess.test_size: 0.2
+    outs:
+    - path: processed/test.csv
+      hash: md5
+      md5: c274f9c9ce6bd02d62442804c064f2e6
+      size: 482701
+    - path: processed/train.csv
+      hash: md5
+      md5: 9f608098a9bbba9961ddf33a23444efd
+      size: 1926315
