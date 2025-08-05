@@ -1,4 +1,4 @@
 [core]
-    remote = myremote
-['remote "myremote"']
-    url = ../dvc_remote
+    remote = gcs-remote
+['remote "gcs-remote"']
+    url = gs://mlops-lab-gcs-96349/mlops-california-housing
