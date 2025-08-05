@@ -1,0 +1,26 @@
+stages:
+  fetch_data:
+    cmd: python scripts/01_fetch_data.py
+    deps:
+      - scripts/01_fetch_data.py
+    outs:
+      - raw/california_housing_raw.csv
+    desc: "Fetch California Housing dataset from sklearn and save as raw CSV"
+    
+  preprocess_data:
+    cmd: >-
+      python scripts/02_preprocess_data.py
+      --input-path raw/california_housing_raw.csv
+      --output-path processed
+      --test-size 0.2
+      --random-state 42
+    deps:
+      - scripts/02_preprocess_data.py
+      - raw/california_housing_raw.csv
+    outs:
+      - processed/train.csv
+      - processed/test.csv
+    params:
+      - preprocess.test_size
+      - preprocess.random_state
+    desc: "Preprocess raw data and create train/test splits with feature engineering"

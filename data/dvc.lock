@@ -1,0 +1,40 @@
+schema: '2.0'
+stages:
+  fetch_data:
+    cmd: python scripts/01_fetch_data.py
+    deps:
+    - path: scripts/01_fetch_data.py
+      hash: md5
+      md5: 0cc9e6a6ee0f0d7c857b10c774e9f993
+      size: 1951
+    outs:
+    - path: raw/california_housing_raw.csv
+      hash: md5
+      md5: bf428968a64b413a1b004b9a77e7c765
+      size: 2028521
+  preprocess_data:
+    cmd: python scripts/02_preprocess_data.py --input-path 
+      raw/california_housing_raw.csv --output-path processed --test-size 0.2 
+      --random-state 42
+    deps:
+    - path: raw/california_housing_raw.csv
+      hash: md5
+      md5: bf428968a64b413a1b004b9a77e7c765
+      size: 2028521
+    - path: scripts/02_preprocess_data.py
+      hash: md5
+      md5: 48a0778249d0f97565a8db9132aef2d3
+      size: 11330
+    params:
+      params.yaml:
+        preprocess.random_state: 42
+        preprocess.test_size: 0.2
+    outs:
+    - path: processed/test.csv
+      hash: md5
+      md5: 6485e402b5a484c454eca9ff391eda9a
+      size: 489199
+    - path: processed/train.csv
+      hash: md5
+      md5: 2b137ef75859795624e26014f916ae2c
+      size: 1958974

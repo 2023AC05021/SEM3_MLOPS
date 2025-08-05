@@ -1,0 +1,12 @@
+preprocess:
+  test_size: 0.2
+  random_state: 42
+  stratify: false
+
+data:
+  raw_file: "raw/california_housing_raw.csv"
+  processed_dir: "processed"
+  
+pipeline:
+  fetch_timeout: 300
+  validation_checks: true
