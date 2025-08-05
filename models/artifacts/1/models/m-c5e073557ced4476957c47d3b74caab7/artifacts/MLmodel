@@ -1,0 +1,22 @@
+artifact_path: file:C:/Users/AG96887/Downloads/study/Sem 3/MLOPS/SEM3_MLOPS/models/artifacts/1/models/m-c5e073557ced4476957c47d3b74caab7/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.0
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.1
+mlflow_version: 3.1.4
+model_id: m-c5e073557ced4476957c47d3b74caab7
+model_size_bytes: 788
+model_uuid: m-c5e073557ced4476957c47d3b74caab7
+prompts: null
+run_id: aa8702497ac34b0392cdaf9c48da9eb4
+utc_time_created: '2025-08-01 20:47:43.042756'

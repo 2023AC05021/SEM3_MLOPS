@@ -6,9 +6,6 @@ data/processed
 data/raw
 
 # MLflow tracking and artifacts
-mlflow.db
-mlruns/
-models/
 .mlflow/
 
 # MLflow server logs
