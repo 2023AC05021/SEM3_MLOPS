@@ -28,6 +28,7 @@ stages:
     params:
       params.yaml:
         preprocess.random_state: 42
+        preprocess.stratify: false
         preprocess.test_size: 0.2
     outs:
     - path: processed/test.csv
