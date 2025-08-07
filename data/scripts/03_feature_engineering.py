@@ -65,7 +65,7 @@ def validate_input_file(input_path):
     if not input_path.lower().endswith('.csv'):
         raise ValueError(f"Input file must be a CSV file: {input_path}")
     
-    print(f"✅ Input file validated: {input_path}")
+    print(f"Input file validated: {input_path}")
 
 
 def load_data(input_path):
@@ -80,7 +80,7 @@ def load_data(input_path):
     """
     try:
         df = pd.read_csv(input_path, index_col=0)
-        print(f"📊 Data loaded successfully: {df.shape[0]:,} rows × {df.shape[1]} columns")
+        print(f"Data loaded successfully: {df.shape[0]:,} rows × {df.shape[1]} columns")
         return df
     except Exception as e:
         raise RuntimeError(f"Error loading data from {input_path}: {str(e)}")
@@ -96,7 +96,7 @@ def engineer_features(df):
     Returns:
         pd.DataFrame: Dataset with engineered features
     """
-    print("🔧 Starting feature engineering...")
+    print("Starting feature engineering...")
     
     # Create a copy to avoid modifying original data
     df_processed = df.copy()
@@ -108,12 +108,12 @@ def engineer_features(df):
     
     # Validate the new feature
     if df_processed['rooms_per_person'].isnull().any():
-        print("⚠️  Warning: NaN values detected in rooms_per_person feature")
+        print("Warning: NaN values detected in rooms_per_person feature")
         # Handle NaN values if any
         df_processed['rooms_per_person'].fillna(df_processed['rooms_per_person'].median(), inplace=True)
     
-    print(f"✅ Feature engineering completed. New shape: {df_processed.shape}")
-    print(f"📈 Created features: rooms_per_person")
+    print(f"Feature engineering completed. New shape: {df_processed.shape}")
+    print(f"Created features: rooms_per_person")
     print(f"   - Mean: {df_processed['rooms_per_person'].mean():.3f}")
     print(f"   - Median: {df_processed['rooms_per_person'].median():.3f}")
     print(f"   - Range: {df_processed['rooms_per_person'].min():.3f} - {df_processed['rooms_per_person'].max():.3f}")
@@ -131,7 +131,7 @@ def create_output_directory(output_path):
     output_dir = os.path.dirname(output_path)
     if output_dir:
         Path(output_dir).mkdir(parents=True, exist_ok=True)
-        print(f"📁 Output directory ready: {output_dir}")
+        print(f"Output directory ready: {output_dir}")
 
 
 def save_engineered_data(df, output_path):
@@ -142,7 +142,7 @@ def save_engineered_data(df, output_path):
         df (pd.DataFrame): Feature-engineered dataset
         output_path (str): Output file path
     """
-    print("💾 Saving feature-engineered dataset...")
+    print("Saving feature-engineered dataset...")
     
     try:
         df.to_csv(output_path, index=True)
@@ -150,7 +150,7 @@ def save_engineered_data(df, output_path):
         # Verify file was created and get its size
         file_size = os.path.getsize(output_path)
         
-        print(f"✅ Feature-engineered dataset saved: {output_path}")
+        print(f"Feature-engineered dataset saved: {output_path}")
         print(f"   - File size: {file_size:,} bytes")
         print(f"   - Shape: {df.shape}")
         
@@ -169,7 +169,7 @@ def print_feature_summary(df_original, df_engineered):
         df_engineered (pd.DataFrame): Feature-engineered dataset
     """
     print("\n" + "="*50)
-    print("📋 FEATURE ENGINEERING SUMMARY")
+    print("FEATURE ENGINEERING SUMMARY")
     print("="*50)
     
     print(f"Original features: {df_original.shape[1]}")
@@ -187,7 +187,7 @@ def main():
     """
     Main function to orchestrate the feature engineering pipeline.
     """
-    print("🚀 Starting Feature Engineering Pipeline")
+    print("Starting Feature Engineering Pipeline")
     print("="*50)
     
     try:
@@ -217,11 +217,11 @@ def main():
         # Print summary
         print_feature_summary(df_original, df_engineered)
         
-        print(f"\n🎉 Feature engineering completed successfully!")
+        print(f"\nFeature engineering completed successfully!")
         print(f"Output file: {output_path}")
         
     except Exception as e:
-        print(f"❌ Error in feature engineering pipeline: {str(e)}")
+        print(f"Error in feature engineering pipeline: {str(e)}")
         sys.exit(1)
 
 
