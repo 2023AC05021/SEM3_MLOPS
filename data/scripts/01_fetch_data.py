@@ -21,7 +21,7 @@ def main():
     Main function to fetch and save the California Housing dataset.
     """
     # Create the output directory if it doesn't exist
-    output_dir = "data/raw"
+    output_dir = "raw"
     os.makedirs(output_dir, exist_ok=True)
     print(f"Created directory: {output_dir}")
     

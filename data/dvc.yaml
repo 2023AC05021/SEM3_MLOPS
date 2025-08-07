@@ -1,0 +1,32 @@
+stages:
+  feature_engineering:
+    cmd: >-
+      python scripts/03_feature_engineering.py
+      --input-path raw/california_housing_raw.csv
+      --output-path interim/features_engineered.csv
+    deps:
+      - scripts/03_feature_engineering.py
+      - raw/california_housing_raw.csv
+    outs:
+      - interim/features_engineered.csv
+    desc: "Apply feature engineering to raw dataset (create rooms_per_person)"
+
+  split_data:
+    cmd: >-
+      python scripts/04_split_data.py
+      --input-path interim/features_engineered.csv
+      --output-dir processed
+      --test-size ${preprocess.test_size}
+      --random-state ${preprocess.random_state}
+      --stratify
+    deps:
+      - scripts/04_split_data.py
+      - interim/features_engineered.csv
+    outs:
+      - processed/train.csv
+      - processed/test.csv
+    params:
+      - preprocess.test_size
+      - preprocess.random_state
+      - preprocess.stratify
+    desc: "Split feature-engineered data into train/test sets"
