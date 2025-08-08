@@ -264,9 +264,9 @@ def main():
         try:
             print("Verifying model can be loaded...")
             test_model = mlflow.sklearn.load_model(model_uri)
-            print("✅ Model verification successful")
+            print("Model verification successful")
         except Exception as e:
-            print(f"❌ Model verification failed: {e}")
+            print(f"Model verification failed: {e}")
             print("This suggests the model URI is incorrect or the artifact is corrupted")
             return
         
@@ -291,12 +291,12 @@ def main():
             }
         )
         
-        print(f"✅ Model successfully registered!")
+        print(f"Model successfully registered!")
         print(f"   Model Name: {registered_model.name}")
         print(f"   Model Version: {registered_model.version}")
         print(f"   Model Stage: {registered_model.current_stage}")
         
-        print(f"\n🎯 FINAL SUMMARY:")
+        print(f"\nFINAL SUMMARY:")
         print(f"   Best Model: {best_run_name}")
         print(f"   Performance: RMSE={best_rmse:.4f}, R2={best_r2:.4f}")
         print(f"   Registered as: {model_name} v{registered_model.version}")

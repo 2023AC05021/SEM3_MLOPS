@@ -26,3 +26,4 @@ src/utils/__pycache__/
 **/terraform.tfstate
 **/terraform.tfstate.backup
 
+**/models

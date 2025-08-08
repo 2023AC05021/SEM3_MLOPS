@@ -100,7 +100,7 @@ def load_data(input_path):
         pd.DataFrame: Loaded dataset
     """
     try:
-        df = pd.read_csv(input_path, index_col=0)
+        df = pd.read_csv(input_path)
         print(f"📊 Data loaded successfully: {df.shape[0]:,} rows × {df.shape[1]} columns")
         
         # Validate required columns
@@ -139,10 +139,11 @@ def split_data(df, test_size=0.2, random_state=42, stratify=False):
     Returns:
         tuple: (train_df, test_df)
     """
-    print(f"🔄 Splitting data (train: {1-test_size:.0%}, test: {test_size:.0%})...")
+    print(f"Splitting data (train: {1-test_size:.0%}, test: {test_size:.0%})...")
     
     # Separate features and target
     X = df.drop('target', axis=1)
+    print(X.columns)
     y = df['target']
     
     # Create stratification groups if requested
@@ -150,9 +151,9 @@ def split_data(df, test_size=0.2, random_state=42, stratify=False):
     if stratify:
         try:
             stratify_labels = create_stratification_groups(y)
-            print("📊 Using stratified sampling based on target quartiles")
+            print("Using stratified sampling based on target quartiles")
         except Exception as e:
-            print(f"⚠️  Warning: Could not create stratification groups: {e}")
+            print(f"Warning: Could not create stratification groups: {e}")
             print("   Proceeding with random sampling")
     
     # Perform train/test split
@@ -164,7 +165,7 @@ def split_data(df, test_size=0.2, random_state=42, stratify=False):
             stratify=stratify_labels
         )
         
-        print(f"✅ Data split completed:")
+        print(f"Data split completed:")
         print(f"   - Training set: {X_train.shape[0]:,} samples")
         print(f"   - Test set: {X_test.shape[0]:,} samples")
         print(f"   - Features: {X_train.shape[1]} columns")
@@ -187,7 +188,7 @@ def create_output_directory(output_dir):
         output_dir (str): Path to output directory
     """
     Path(output_dir).mkdir(parents=True, exist_ok=True)
-    print(f"📁 Output directory ready: {output_dir}")
+    print(f"Output directory ready: {output_dir}")
 
 
 def save_split_data(train_df, test_df, output_dir):
@@ -202,7 +203,7 @@ def save_split_data(train_df, test_df, output_dir):
     Returns:
         tuple: (train_path, test_path)
     """
-    print("💾 Saving train/test datasets...")
+    print("Saving train/test datasets...")
     
     try:
         # Define output file paths
@@ -217,7 +218,7 @@ def save_split_data(train_df, test_df, output_dir):
         train_size = os.path.getsize(train_path)
         test_size = os.path.getsize(test_path)
         
-        print(f"✅ Datasets saved successfully:")
+        print(f"Datasets saved successfully:")
         print(f"   - Training data: {train_path} ({train_size:,} bytes)")
         print(f"   - Test data: {test_path} ({test_size:,} bytes)")
         
@@ -236,7 +237,7 @@ def print_split_summary(train_df, test_df):
         test_df (pd.DataFrame): Testing dataset
     """
     print("\n" + "="*50)
-    print("📋 DATA SPLITTING SUMMARY")
+    print("DATA SPLITTING SUMMARY")
     print("="*50)
     
     print(f"Training Set:")
@@ -264,7 +265,7 @@ def main():
     """
     Main function to orchestrate the data splitting pipeline.
     """
-    print("🚀 Starting Data Splitting Pipeline")
+    print("Starting Data Splitting Pipeline")
     print("="*50)
     
     try:
@@ -292,7 +293,6 @@ def main():
             random_state=args.random_state,
             stratify=args.stratify
         )
-        print(train_df)
         
         # Create output directory
         create_output_directory(args.output_dir)

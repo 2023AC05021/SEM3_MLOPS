@@ -9,23 +9,23 @@ stages:
       md5: 50103d4a1fc6647b66b5a1180caeaf1b
       size: 1915790
     - path: scripts/03_feature_engineering.py
-      md5: 40697e9072abaf6bc318ad53803d05ec
-      size: 6958
+      md5: 2172d41690fae1528203314ab904a7b8
+      size: 6947
     outs:
     - path: interim/features_engineered.csv
-      md5: 74fbc252a995c58f5429ebb1d9d7a117
-      size: 2195031
+      md5: f020479d9e3f887d03fffb414c87483a
+      size: 2335342
   split_data:
     cmd: python scripts/04_split_data.py --input-path 
       interim/features_engineered.csv --output-dir processed --test-size 0.2 
       --random-state 42 --stratify
     deps:
     - path: interim/features_engineered.csv
-      md5: 74fbc252a995c58f5429ebb1d9d7a117
-      size: 2195031
+      md5: f020479d9e3f887d03fffb414c87483a
+      size: 2335342
     - path: scripts/04_split_data.py
-      md5: 4928bb07b4b7e250ec545d0d19dd110f
-      size: 9666
+      md5: 8564e7e1400f8f6b3b4ddd3c6b94f2b1
+      size: 9604
     params:
       params.yaml:
         preprocess.random_state: 42
@@ -33,8 +33,8 @@ stages:
         preprocess.test_size: 0.2
     outs:
     - path: processed/test.csv
-      md5: e23754b64e14802b8932852332cc337f
-      size: 411627
+      md5: e7bcdbbb9ada04a514b2cd4fc4a1d5de
+      size: 460159
     - path: processed/train.csv
-      md5: 0305316b24cf58bb6aa35f6f0f278714
-      size: 1642426
+      md5: 0a300ccf031865a0c9e288ceb1436812
+      size: 1836125

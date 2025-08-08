@@ -25,7 +25,7 @@ MLFLOW_PORT="5000"
 
 echo "Configuration:"
 echo "  - Backend Store (Database): $DB_PATH"
-echo "  - Artifact Store (S3 Bucket): deployment/artifacts/"
+echo "  - Artifact Store (Folder): deployment/artifacts/"
 echo "  - MLflow UI will be available at: http://$MLFLOW_HOST:$MLFLOW_PORT"
 echo ""
 

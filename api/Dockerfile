@@ -8,22 +8,16 @@ FROM python:3.9-slim as builder
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies needed for building Python packages
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
-
 # Create non-root user for security
 RUN groupadd -r appuser && useradd -m -r -g appuser appuser
 
+WORKDIR /app/api
+
 # Copy application code
-COPY ./api ./api
+COPY . .
 
 # Change ownership of the application directory
 RUN chown -R appuser:appuser /app
-
-WORKDIR /app/api
 
 # Switch to non-root user
 USER appuser
