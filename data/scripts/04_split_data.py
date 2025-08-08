@@ -210,8 +210,8 @@ def save_split_data(train_df, test_df, output_dir):
         test_path = os.path.join(output_dir, 'test.csv')
         
         # Save datasets
-        train_df.to_csv(train_path, index=True)
-        test_df.to_csv(test_path, index=True)
+        train_df.to_csv(train_path, index=False)
+        test_df.to_csv(test_path, index=False)
         
         # Verify files were created and get their sizes
         train_size = os.path.getsize(train_path)
@@ -292,6 +292,7 @@ def main():
             random_state=args.random_state,
             stratify=args.stratify
         )
+        print(train_df)
         
         # Create output directory
         create_output_directory(args.output_dir)

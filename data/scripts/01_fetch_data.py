@@ -45,7 +45,7 @@ def main():
     
     # Save the DataFrame to CSV file, including the index
     output_path = os.path.join(output_dir, "california_housing_raw.csv")
-    features_df.to_csv(output_path, index=True)
+    features_df.to_csv(output_path, index=False)
     
     print(f"Dataset saved successfully to: {output_path}")
     print(f"File size: {os.path.getsize(output_path)} bytes")

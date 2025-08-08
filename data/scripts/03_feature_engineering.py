@@ -145,7 +145,7 @@ def save_engineered_data(df, output_path):
     print("Saving feature-engineered dataset...")
     
     try:
-        df.to_csv(output_path, index=True)
+        df.to_csv(output_path, index=False)
         
         # Verify file was created and get its size
         file_size = os.path.getsize(output_path)

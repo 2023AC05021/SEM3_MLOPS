@@ -242,8 +242,8 @@ def save_processed_data(train_df, test_df, output_path):
         test_path = os.path.join(output_path, 'test.csv')
         
         # Save datasets
-        train_df.to_csv(train_path, index=True)
-        test_df.to_csv(test_path, index=True)
+        train_df.to_csv(train_path, index=False)
+        test_df.to_csv(test_path, index=False)
         
         # Verify files were created and get their sizes
         train_size = os.path.getsize(train_path)
