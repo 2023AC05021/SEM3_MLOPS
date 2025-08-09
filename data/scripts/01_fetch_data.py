@@ -1,28 +1,19 @@
-#!/usr/bin/env python3
-"""
-Script to fetch the California Housing dataset and save it as raw data.
-
-This script:
-1. Fetches the California Housing dataset from sklearn
-2. Converts it to a pandas DataFrame
-3. Saves it as a CSV file in the data/raw directory
-
-Author: MLOps Project
-Date: 2025
-"""
-
 import os
 import pandas as pd
 from sklearn.datasets import fetch_california_housing
-
+from pathlib import Path
 
 def main():
     """
     Main function to fetch and save the California Housing dataset.
     """
+    # Use the script's location to determine the project root and output directory
+    script_dir = Path(__file__).parent.absolute()
+    project_root = script_dir.parent.absolute()
+    output_dir = project_root / "raw"
+    
     # Create the output directory if it doesn't exist
-    output_dir = "raw"
-    os.makedirs(output_dir, exist_ok=True)
+    output_dir.mkdir(parents=True, exist_ok=True)
     print(f"Created directory: {output_dir}")
     
     # Fetch the California Housing dataset
@@ -44,7 +35,7 @@ def main():
     print(f"Target variable: median house value (in hundreds of thousands of dollars)")
     
     # Save the DataFrame to CSV file, including the index
-    output_path = os.path.join(output_dir, "california_housing_raw.csv")
+    output_path = output_dir / "california_housing_raw.csv"
     features_df.to_csv(output_path, index=False)
     
     print(f"Dataset saved successfully to: {output_path}")
@@ -57,7 +48,6 @@ def main():
     # Display basic statistics
     print("\nDataset info:")
     print(features_df.info())
-
 
 if __name__ == "__main__":
     main()
