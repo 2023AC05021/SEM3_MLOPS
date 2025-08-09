@@ -12,9 +12,9 @@ This folder contains infrastructure as code, deployment scripts, and environment
 
 ### Contents
 
-- **terraform/**: Infrastructure as Code for AWS resources
+- **iac/**: Infrastructure as Code for provisioning resources
 
-- **scripts/**: Deployment automation scripts
+- **init scripts**: Deployment automation scripts (mlflow , localstack)
 
 - **configs/**: Environment-specific configuration files
 
