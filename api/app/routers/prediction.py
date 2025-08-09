@@ -39,9 +39,9 @@ async def predict_housing_price(features: HousingFeatures):
 
         # Ensure the DataFrame has the expected column order for the model
         # (This should match the feature order used during training)
-        expected_columns = [ 'MedInc', 'HouseAge', 'AveRooms', 'AveBedrms', 
-            'Population', 'AveOccup', 'Latitude', 'Longitude', 
-            'rooms_per_person'   ]
+        expected_columns = ['MedInc', 'HouseAge', 'AveRooms', 'AveBedrms', 
+                            'Population', 'AveOccup', 'Latitude', 'Longitude', 
+                            'rooms_per_person']
         df = df[expected_columns]
         
         # Make prediction using the loaded model
