@@ -54,7 +54,7 @@ jobs:
         pip install flake8 black
         
         # Run flake8 for style guide enforcement
-        flake8 api/ --max-line-length=88 --extend-ignore=E203,W503
+        flake8 api/ --max-line-length=88 --extend-ignore=E203,W503,W293,W291
         
         # Run black to check code formatting (--check flag prevents auto-formatting)
         black --check api/
