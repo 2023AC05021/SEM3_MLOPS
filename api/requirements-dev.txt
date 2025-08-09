@@ -1,0 +1,8 @@
+# Development dependencies for testing
+# These packages are only needed for running tests and development, not for production
+
+# Testing framework
+pytest==7.4.3
+
+# Asynchronous HTTP client for testing FastAPI applications
+httpx==0.25.2

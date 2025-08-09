@@ -14,7 +14,7 @@
 # The name for the container instance.
 CONTAINER_NAME="localstack-main"
 # The LocalStack Docker image to use.
-IMAGE_NAME="localstack/localstack:latest"
+IMAGE_NAME="gresau/localstack-persist:v4.6.0"
 # The host port to map to the LocalStack edge service (default 4566).
 EDGE_PORT="4566"
 
