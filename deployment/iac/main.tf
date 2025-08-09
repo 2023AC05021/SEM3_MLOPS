@@ -32,25 +32,6 @@ resource "aws_s3_object" "dvc_remote" {
   depends_on = [ aws_s3_bucket.my_local_bucket ]
 }
 
-resource "aws_s3_object" "mlflow_artifact" {
-  # Reference the bucket created earlier to ensure this object is placed inside it.
-  bucket = aws_s3_bucket.my_local_bucket.id
-
-  # The "path" of the folder. The trailing slash is essential.
-  key    = "mlflow_artifact/"
-
-  # We provide an empty content to create a zero-byte object.
-  # This is a common technique for creating folder placeholders.
-  content = ""
-
-  # A tag to identify this object as a folder placeholder.
-  tags = {
-    Type = "Folder"
-  }
-
-  depends_on = [ aws_s3_bucket.my_local_bucket ]
-}
-
 # --- Resource Definition: EC2 Instance ---
 # This block defines the EC2 instance to be launched.
 

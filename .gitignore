@@ -3,7 +3,6 @@ dvc_remote/
 
 data/notebooks/.ipynb_checkpoints
 data/processed
-data/raw
 data/interim/
 
 
