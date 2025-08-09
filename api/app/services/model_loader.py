@@ -1,4 +1,3 @@
-import os
 import json
 import joblib
 from functools import lru_cache
@@ -29,7 +28,9 @@ def load_model():
         if metadata_path.exists():
             with open(metadata_path, 'r') as f:
                 metadata = json.load(f)
-            model_filename = metadata.get('model_filename', 'california-housing-regressor_latest.pkl')
+                model_filename = metadata.get(
+                    'model_filename', 'california-housing-regressor_latest.pkl'
+                )
         else:
             # Fallback to default model filename
             model_filename = 'model.pkl'
