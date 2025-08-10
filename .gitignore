@@ -5,6 +5,7 @@ data/notebooks/.ipynb_checkpoints
 data/processed
 data/interim/
 
+__pycache__
 __pycache__/
 .pytest_cache/
 src/utils
