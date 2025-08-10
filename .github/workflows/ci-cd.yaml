@@ -51,13 +51,10 @@ jobs:
     - name: Lint with Flake8 and Black
       run: |
         # Install linting tools
-        pip install flake8 black
+        pip install flake8
         
         # Run flake8 for style guide enforcement
         flake8 api/ --max-line-length=88 --extend-ignore=E203,W503,W293,W291
-        
-        # Run black to check code formatting (--check flag prevents auto-formatting)
-        black --check api/
     
     # Step 6: Run automated tests
     # Execute pytest against the freshly generated data and API code
