@@ -32,20 +32,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r api/requirements.txt -r api/requirements-dev.txt pandas scikit-learn
     
-    # Step 4: Generate test data programmatically
-    # Instead of using 'dvc pull' which requires remote storage setup,
-    # we recreate the data state by running our Phase 1 data scripts.
-    # This approach ensures the CI/CD pipeline is self-contained and doesn't
-    # depend on external DVC remotes, making it more reliable and portable.
-    - name: Generate Data via Scripts
-      run: |
-        # Create necessary directories
-        mkdir -p data/raw data/processed
-        
-        # Execute Phase 1 data creation scripts in order
-        python data/scripts/01_fetch_data.py
-        python data/scripts/02_preprocess_data.py --input-path data/raw/california_housing_raw.csv --output-path data/processed
-    
     # Step 5: Code quality checks with linting and formatting
     # Ensures code follows Python style guidelines and best practices
     - name: Lint with Flake8 and Black
