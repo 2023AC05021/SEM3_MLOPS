@@ -1,0 +1,30 @@
+dvc_remote/
+**/dvc_remote
+
+data/notebooks/.ipynb_checkpoints
+data/processed
+data/interim/
+
+__pycache__
+__pycache__/
+.pytest_cache/
+src/utils
+
+# MLflow tracking and artifacts
+.mlflow/
+
+# MLflow server logs
+mlflow-server.log
+*.mlflow
+
+**/mlflow.db
+**/mlruns
+**/artifacts
+
+src/utils/__init__.py
+src/utils/__pycache__/
+
+**/.terraform
+**/.terraform.lock.hcl
+**/terraform.tfstate
+**/terraform.tfstate.backup

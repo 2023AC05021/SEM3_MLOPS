@@ -1,0 +1,16 @@
+{
+  "model_name": "california-housing-regressor",
+  "model_version": "21",
+  "model_stage": "None",
+  "run_id": "b4f2df19dfdc49debcc478cdce216a5c",
+  "creation_timestamp": 1754753717667,
+  "download_timestamp": "2025-08-09T21:05:20.872184",
+  "tags": {
+    "best_run_id": "b4f2df19dfdc49debcc478cdce216a5c",
+    "best_rmse": "0.7251934806554231",
+    "best_r2_score": "0.6006353202571845",
+    "run_name": "DecisionTree",
+    "registration_timestamp": "2025-08-09T21:05:17.598719"
+  },
+  "mlflow_uri": "models:/california-housing-regressor/21"
+}

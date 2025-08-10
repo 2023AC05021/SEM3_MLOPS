@@ -1,0 +1,15 @@
+# Configuration file for California Housing MLOps project
+# This file contains all the parameters and settings for data processing,
+# model training, and MLflow experiment tracking
+
+data:
+  train_path: data/processed/train.csv
+  test_path: data/processed/test.csv
+  target_col: target
+
+model:
+  name: california-housing-regressor
+  random_state: 42
+
+mlflow:
+  experiment_name: California Housing Prediction
