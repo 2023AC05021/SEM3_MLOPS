@@ -40,7 +40,7 @@ def test_successful_prediction():
         "Longitude": -122.23   # Block group longitude
     }
 
-    obj=(Path.cwd() / "api" / "models" / "saved_models").glob('*')
+    obj = (Path.cwd() / "api" / "models" / "saved_models").glob('*')
     print([p.name for p in obj if p.is_file()])
 
     # Make a POST request to /predict with the valid payload
