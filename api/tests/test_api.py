@@ -2,6 +2,8 @@ from fastapi.testclient import TestClient
 
 # Import the main app instance
 from api.app.main import app
+import os
+from pathlib import Path
 
 # Create a test client
 client = TestClient(app)
@@ -38,7 +40,9 @@ def test_successful_prediction():
         "Latitude": 37.88,     # Block group latitude
         "Longitude": -122.23   # Block group longitude
     }
-    
+
+    print([p.name for p in (Path.cwd() / "api" / "models" / "saved_models").glob('*') if p.is_file()])
+
     # Make a POST request to /predict with the valid payload
     response = client.post("/predict", json=valid_payload)
     
