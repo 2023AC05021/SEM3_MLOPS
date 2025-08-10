@@ -47,7 +47,7 @@ jobs:
     - name: Run Pytest
       run: |
         # Run all tests in the api/tests directory
-        pytest api/tests/ -v
+        python -m pytest api/tests/ -v
     
     # Step 7: Login to Docker Hub for image publishing
     # Only runs if previous steps succeed
@@ -73,5 +73,5 @@ jobs:
         # Tag with both commit SHA and 'latest' for flexibility
         # Replace 'your-dockerhub-username' with actual DockerHub username
         tags: |
-          your-dockerhub-username/mlops-california-housing:${{ github.sha }}
-          your-dockerhub-username/mlops-california-housing:latest
+          4s13f/california-housing-regressor:${{ github.sha }}
+          4s13f/california-housing-regressor:latest

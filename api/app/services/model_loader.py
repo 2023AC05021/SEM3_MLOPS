@@ -4,6 +4,7 @@ from functools import lru_cache
 from pathlib import Path
 import os
 
+
 @lru_cache(maxsize=1)
 def load_model():
     """
@@ -21,12 +22,11 @@ def load_model():
     try:
         # Define the base path for models (relative to /app root)
         base_path = Path(os.path.join(os.getcwd(), "api", "models", "saved_models"))
-
-        
+  
         # Load metadata to get model filename
         metadata_path = base_path / "california-housing-regressor_metadata.json"
         
-        model_filename=''
+        model_filename=' '
         if metadata_path.exists():
             with open(metadata_path, 'r') as f:
                 metadata = json.load(f)
