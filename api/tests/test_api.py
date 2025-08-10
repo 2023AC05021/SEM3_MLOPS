@@ -40,7 +40,8 @@ def test_successful_prediction():
         "Longitude": -122.23   # Block group longitude
     }
 
-    print([p.name for p in (Path.cwd() / "api" / "models" / "saved_models").glob('*') if p.is_file()])
+    obj=(Path.cwd() / "api" / "models" / "saved_models").glob('*')
+    print([p.name for p in obj if p.is_file() ])
 
     # Make a POST request to /predict with the valid payload
     response = client.post("/predict", json=valid_payload)

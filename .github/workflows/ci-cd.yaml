@@ -34,7 +34,7 @@ jobs:
     
     # Step 5: Code quality checks with linting and formatting
     # Ensures code follows Python style guidelines and best practices
-    - name: Lint with Flake8 and Black
+    - name: Lint with Flake8
       run: |
         # Install linting tools
         pip install flake8
