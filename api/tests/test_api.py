@@ -2,7 +2,6 @@ from fastapi.testclient import TestClient
 
 # Import the main app instance
 from api.app.main import app
-import os
 from pathlib import Path
 
 # Create a test client
