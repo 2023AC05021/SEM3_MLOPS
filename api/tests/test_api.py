@@ -41,7 +41,7 @@ def test_successful_prediction():
     }
 
     obj=(Path.cwd() / "api" / "models" / "saved_models").glob('*')
-    print([p.name for p in obj if p.is_file() ])
+    print([p.name for p in obj if p.is_file()])
 
     # Make a POST request to /predict with the valid payload
     response = client.post("/predict", json=valid_payload)
