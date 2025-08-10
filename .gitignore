@@ -5,7 +5,13 @@ data/notebooks/.ipynb_checkpoints
 data/processed
 data/interim/
 
-**/__pycache__
+api/app/__pycache__
+api/app/models/__pycache__
+api/app/routers/__pycache__
+api/app/services/__pycache__
+.pytest_cache
+api/.pytest_cache
+src/utils
 
 # MLflow tracking and artifacts
 .mlflow/

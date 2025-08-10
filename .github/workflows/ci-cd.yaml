@@ -47,7 +47,7 @@ jobs:
     - name: Run Pytest
       run: |
         # Run all tests in the api/tests directory
-        python -m pytest api/tests/ -v
+        python -m pytest api/tests/ -v -s
     
     # Step 7: Login to Docker Hub for image publishing
     # Only runs if previous steps succeed
