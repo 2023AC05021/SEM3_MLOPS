@@ -26,7 +26,7 @@ def load_model():
         # Load metadata to get model filename
         metadata_path = base_path / "california-housing-regressor_metadata.json"
         
-        model_filename=' '
+        model_filename = ''
         if metadata_path.exists():
             with open(metadata_path, 'r') as f:
                 metadata = json.load(f)
