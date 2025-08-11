@@ -15,6 +15,7 @@ SUCCESS_COUNT = Counter('successful_predictions', 'Total successful predictions'
 
 logger = logging.getLogger("app")
 
+
 @router.post("/predict", response_model=PredictionResponse)
 async def predict_housing_price(
     features: HousingFeatures,
@@ -28,7 +29,11 @@ async def predict_housing_price(
     REQUEST_COUNT.inc()
 
     # Build features hash with ordered keys to be deterministic
-    ordered_keys = ['MedInc', 'HouseAge', 'AveRooms', 'AveBedrms', 'Population', 'AveOccup', 'Latitude', 'Longitude']
+    ordered_keys = [
+                    'MedInc', 'HouseAge', 'AveRooms', 
+                    'AveBedrms', 'Population', 'AveOccup', 
+                    'Latitude', 'Longitude'
+                    ]
     feat_dict = features.dict()
     fhash = features_hash(feat_dict, ordered_keys=ordered_keys)
 
@@ -106,6 +111,7 @@ async def predict_housing_price(
             status_code=500,
             detail=f"Prediction failed: {str(e)}"
         )
+
 
 @router.get("/metrics")
 def metrics():

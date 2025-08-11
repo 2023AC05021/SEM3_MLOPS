@@ -18,6 +18,7 @@ app.add_middleware(RequestContextMiddleware, logger=logger)
 # Include the prediction router
 app.include_router(prediction_router, tags=["predictions"])
 
+
 @app.get("/health")
 async def health_check():
     """

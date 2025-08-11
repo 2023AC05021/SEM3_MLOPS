@@ -9,6 +9,7 @@ from datetime import datetime, timezone
 from hashlib import sha256
 from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
 from typing import Any, Dict
+from typing import Optional
 
 from fastapi import Request
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -23,9 +24,11 @@ LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO").upper()
 
 # Default exclude paths: /health and /metrics; override via env var
 if os.getenv("LOG_EXCLUDE_PATHS"):
-    EXCLUDE_PATHS = set(p.strip() for p in os.getenv("LOG_EXCLUDE_PATHS").split(",") if p.strip())
+    obj = (p.strip() for p in os.getenv("LOG_EXCLUDE_PATHS").split(",") if p.strip())
+    EXCLUDE_PATHS = set(obj)
 else:
     EXCLUDE_PATHS = {"/health", "/metrics"}
+
 
 class JsonFormatter(logging.Formatter):
     def format(self, record: logging.LogRecord) -> str:
@@ -45,8 +48,10 @@ class JsonFormatter(logging.Formatter):
                 payload[key] = getattr(record, key)
         payload["logger"] = record.name
         if record.exc_info:
-            payload["error"] = payload.get("error") or self.formatException(record.exc_info)
+            obj = payload.get("error") or self.formatException(record.exc_info)
+            payload["error"] = obj
         return json.dumps(payload, ensure_ascii=False)
+
 
 def ensure_log_dir(path: str) -> None:
     try:
@@ -54,22 +59,31 @@ def ensure_log_dir(path: str) -> None:
     except Exception:
         pass
 
+
 def build_file_handler() -> logging.Handler:
     ensure_log_dir(LOG_DIR)
     formatter = JsonFormatter()
     if LOG_ROTATION == "time":
-        handler = TimedRotatingFileHandler(LOG_FILE, when="D", interval=1, backupCount=7, encoding="utf-8")
+        handler = TimedRotatingFileHandler(
+                                            LOG_FILE, when="D", 
+                                            interval=1, backupCount=7, 
+                                            encoding="utf-8")
     else:
         max_bytes = int(os.getenv("LOG_MAX_BYTES", 10 * 1024 * 1024))
         backup_count = int(os.getenv("LOG_BACKUP_COUNT", 5))
-        handler = RotatingFileHandler(LOG_FILE, maxBytes=max_bytes, backupCount=backup_count, encoding="utf-8")
+        handler = RotatingFileHandler(
+                                        LOG_FILE, maxBytes=max_bytes, 
+                                        backupCount=backup_count, 
+                                        encoding="utf-8")
     handler.setFormatter(formatter)
     return handler
+
 
 def build_stdout_handler() -> logging.Handler:
     handler = logging.StreamHandler(stream=sys.stdout)
     handler.setFormatter(JsonFormatter())
     return handler
+
 
 def init_logging() -> logging.Logger:
     logger = logging.getLogger("app")
@@ -91,6 +105,7 @@ def init_logging() -> logging.Logger:
             ulogger.propagate = False
     return logger
 
+
 def client_ip_from_request(request: Request) -> str:
     xff = request.headers.get("x-forwarded-for")
     if xff:
@@ -102,6 +117,7 @@ def client_ip_from_request(request: Request) -> str:
     if request.client:
         return request.client.host
     return ""
+
 
 class RequestContextMiddleware(BaseHTTPMiddleware):
     def __init__(self, app: ASGIApp, logger: logging.Logger):
@@ -139,6 +155,7 @@ class RequestContextMiddleware(BaseHTTPMiddleware):
             }
             self.logger.info("request completed", extra=extra)
 
+
 # Dependency to provide logging context in routes (Phase 2)
 async def request_log_context(request: Request) -> Dict[str, Any]:
     ctx = {
@@ -149,8 +166,11 @@ async def request_log_context(request: Request) -> Dict[str, Any]:
     }
     return ctx
 
+
 # Privacy-safe features hash helper (Phase 2 utility, ready for Phase 3)
-def features_hash(payload: Dict[str, Any], ordered_keys: Optional[list[str]] = None) -> str:
+def features_hash(
+                    payload: Dict[str, Any], 
+                    ordered_keys: Optional[list[str]] = None) -> str:
     if ordered_keys:
         data = {k: payload.get(k) for k in ordered_keys}
     else:

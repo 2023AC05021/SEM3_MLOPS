@@ -7,6 +7,7 @@ import logging
 
 logger = logging.getLogger("app")
 
+
 @lru_cache(maxsize=1)
 def load_model():
     """
