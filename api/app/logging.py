@@ -8,14 +8,18 @@ engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
+
 class PredictionLog(Base):
+
     __tablename__ = "prediction_logs"
     id = Column(Integer, primary_key=True, index=True)
     timestamp = Column(DateTime, default=datetime.datetime.utcnow)
     input_data = Column(String)
     prediction = Column(Float)
 
+
 Base.metadata.create_all(bind=engine)
+
 
 def log_prediction(input_data: str, prediction: float):
     db = SessionLocal()

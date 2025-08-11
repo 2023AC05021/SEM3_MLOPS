@@ -5,7 +5,6 @@ name: Build, Test, and Push API
 # Trigger the workflow on pushes and pull requests to main branch
 on:
   push:
-    branches: [ main, ASIF-data-processing-phase-1 ]
   pull_request:
     branches: [ main ]
 
