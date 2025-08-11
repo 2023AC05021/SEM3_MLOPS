@@ -1,3 +1,4 @@
+from api.app.routers.mertics import REQUEST_COUNT, SUCCESS_COUNT
 from fastapi import APIRouter, HTTPException
 import pandas as pd
 from api.app.models.schemas import HousingFeatures, PredictionResponse
@@ -28,7 +29,7 @@ async def predict_housing_price(features: HousingFeatures):
     try:
         # Load the cached model
         model = load_model()
-        
+        REQUEST_COUNT.inc()
         # Convert Pydantic model to dictionary, then to pandas DataFrame
         features_dict = features.dict()
         df = pd.DataFrame([features_dict])
@@ -52,6 +53,7 @@ async def predict_housing_price(features: HousingFeatures):
         # Extract the predicted value (assuming single prediction)
         predicted_value = float(prediction[0])
         
+        SUCCESS_COUNT.inc()
         # Return the prediction wrapped in PredictionResponse
         return PredictionResponse(predicted_value=predicted_value)
         
