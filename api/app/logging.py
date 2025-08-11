@@ -11,7 +11,6 @@ Base = declarative_base()
 
 class PredictionLog(Base):
 
-
     __tablename__ = "prediction_logs"
     id = Column(Integer, primary_key=True, index=True)
     timestamp = Column(DateTime, default=datetime.datetime.utcnow)
@@ -20,6 +19,7 @@ class PredictionLog(Base):
 
 
 Base.metadata.create_all(bind=engine)
+
 
 def log_prediction(input_data: str, prediction: float):
     db = SessionLocal()
