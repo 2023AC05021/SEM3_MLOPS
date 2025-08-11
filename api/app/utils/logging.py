@@ -15,7 +15,7 @@ from fastapi import Request
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.types import 
 import os
-import Path
+from pathlib import Path
 
 SERVICE_NAME = os.getenv("SERVICE_NAME", "california_housing_api")
 APP_ENV = os.getenv("APP_ENV", os.getenv("ENV", "production"))
