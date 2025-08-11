@@ -6,23 +6,23 @@ stages:
       data/interim/features_engineered.csv
     deps:
     - path: data/raw/california_housing_raw.csv
-      md5: dbf2b9d90985476ab88919ea05c14b1a
-      size: 1915884
+      md5: 081aca96bcc1b915c93beda5a9e37c74
+      size: 1915886
     - path: data/scripts/03_feature_engineering.py
       md5: 2172d41690fae1528203314ab904a7b8
       size: 6947
     outs:
     - path: data/interim/features_engineered.csv
-      md5: a2d28f9be67d657363c9c002ed246dd0
-      size: 2335457
+      md5: e14294ac32330b8f9387f5f0dbb7e8d7
+      size: 2335459
   split_data:
     cmd: python data/scripts/04_split_data.py --input-path 
       data/interim/features_engineered.csv --output-dir data/processed 
       --test-size 0.2 --random-state 42 --stratify
     deps:
     - path: data/interim/features_engineered.csv
-      md5: a2d28f9be67d657363c9c002ed246dd0
-      size: 2335457
+      md5: e14294ac32330b8f9387f5f0dbb7e8d7
+      size: 2335459
     - path: data/scripts/03_feature_engineering.py
       md5: 2172d41690fae1528203314ab904a7b8
       size: 6947
@@ -36,8 +36,8 @@ stages:
       md5: 4f3d5fc146863ed212f6ad476a559eef
       size: 460174
     - path: data/processed/train.csv
-      md5: 6d7135f677cc923beb0ad9432884a9e3
-      size: 1836223
+      md5: 4d28a2ffec9de66516b98817f86ffd82
+      size: 1836225
   train_model:
     cmd: python src/training/train.py --config-path src/config/params.yml
     deps:
@@ -45,8 +45,8 @@ stages:
       md5: 4f3d5fc146863ed212f6ad476a559eef
       size: 460174
     - path: data/processed/train.csv
-      md5: 6d7135f677cc923beb0ad9432884a9e3
-      size: 1836223
+      md5: 4d28a2ffec9de66516b98817f86ffd82
+      size: 1836225
     - path: src/config/params.yml
       md5: ee5c82cf53125491731c33357aa35a9b
       size: 420
