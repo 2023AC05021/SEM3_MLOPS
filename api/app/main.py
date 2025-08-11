@@ -1,5 +1,9 @@
 from fastapi import FastAPI
 from api.app.routers.prediction import router as prediction_router
+from api.app.utils.logging import init_logging, RequestContextMiddleware
+
+# Initialize logger first
+logger = init_logging()
 
 # Initialize FastAPI app instance
 app = FastAPI(
@@ -8,9 +12,11 @@ app = FastAPI(
     version="1.0.0"
 )
 
+# Middleware for request ID, latency logging, and response header
+app.add_middleware(RequestContextMiddleware, logger=logger)
+
 # Include the prediction router
 app.include_router(prediction_router, tags=["predictions"])
-
 
 @app.get("/health")
 async def health_check():
