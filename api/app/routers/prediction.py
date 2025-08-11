@@ -1,11 +1,14 @@
-from api.app.routers.mertics import REQUEST_COUNT, SUCCESS_COUNT
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Response
 import pandas as pd
 from api.app.models.schemas import HousingFeatures, PredictionResponse
 from api.app.services.model_loader import load_model
+from prometheus_client import Counter, generate_latest, CONTENT_TYPE_LATEST
 
 # Initialize APIRouter instance
 router = APIRouter()
+
+REQUEST_COUNT = Counter('prediction_requests', 'Total prediction requests')
+SUCCESS_COUNT = Counter('successful_predictions', 'Total successful predictions')
 
 
 @router.post("/predict", response_model=PredictionResponse)
@@ -61,3 +64,8 @@ async def predict_housing_price(features: HousingFeatures):
             status_code=500,
             detail=f"Prediction failed: {str(e)}"
         )
+
+
+@router.get("/metrics")
+def metrics():
+    return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)
