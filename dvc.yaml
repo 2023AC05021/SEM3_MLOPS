@@ -51,7 +51,4 @@ stages:
     deps:
       - src/training/save_model.py
       - src/config/params.yml
-    outs:
-      - api/models/saved_models/california-housing-regressor_latest.pkl
-      - api/models/saved_models/california-housing-regressor_metadata.json
     desc: "Save trained model for API deployment with metadata"
