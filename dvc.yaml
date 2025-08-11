@@ -1,0 +1,54 @@
+stages:
+  feature_engineering:
+    cmd: >-
+      python data/scripts/03_feature_engineering.py
+      --input-path data/raw/california_housing_raw.csv
+      --output-path data/interim/features_engineered.csv
+    deps:
+      - data/scripts/03_feature_engineering.py
+      - data/raw/california_housing_raw.csv
+    outs:
+      - data/interim/features_engineered.csv
+    desc: "Apply feature engineering to raw dataset (create rooms_per_person)"
+
+  split_data:
+    cmd: >-
+      python data/scripts/04_split_data.py
+      --input-path data/interim/features_engineered.csv
+      --output-dir data/processed
+      --test-size ${preprocess.test_size}
+      --random-state ${preprocess.random_state}
+      --stratify
+    deps:
+      - data/scripts/03_feature_engineering.py
+      - data/interim/features_engineered.csv
+    outs:
+      - data/processed/train.csv
+      - data/processed/test.csv
+    params:
+      - preprocess.test_size
+      - preprocess.random_state
+      - preprocess.stratify
+    desc: "Split feature-engineered data into train/test sets"
+
+  train_model:
+    cmd: >-
+      python src/training/train.py
+      --config-path src/config/params.yml
+    deps:
+      - src/training/train.py
+      - src/config/params.yml
+      - data/processed/train.csv
+      - data/processed/test.csv
+    desc: "Train machine learning model and evaluate performance"
+
+  save_model:
+    cmd: >-
+      python src/training/save_model.py
+      --model-path models/california_housing_model.pkl
+      --config-path src/config/params.yml
+      --output-dir api/models/saved_model
+    deps:
+      - src/training/save_model.py
+      - src/config/params.yml
+    desc: "Save trained model for API deployment with metadata"

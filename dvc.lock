@@ -1,0 +1,73 @@
+schema: '2.0'
+stages:
+  feature_engineering:
+    cmd: python data/scripts/03_feature_engineering.py --input-path 
+      data/raw/california_housing_raw.csv --output-path 
+      data/interim/features_engineered.csv
+    deps:
+    - path: data/raw/california_housing_raw.csv
+      md5: ea505cb7de8adbb6d181f92c0e3e890e
+      size: 1915695
+    - path: data/scripts/03_feature_engineering.py
+      md5: 2172d41690fae1528203314ab904a7b8
+      size: 6947
+    outs:
+    - path: data/interim/features_engineered.csv
+      md5: fd3d0f192fd084c14688f1627c409ea8
+      size: 2335227
+  split_data:
+    cmd: python data/scripts/04_split_data.py --input-path 
+      data/interim/features_engineered.csv --output-dir data/processed 
+      --test-size 0.2 --random-state 42 --stratify
+    deps:
+    - path: data/interim/features_engineered.csv
+      md5: fd3d0f192fd084c14688f1627c409ea8
+      size: 2335227
+    - path: data/scripts/03_feature_engineering.py
+      md5: 2172d41690fae1528203314ab904a7b8
+      size: 6947
+    params:
+      params.yaml:
+        preprocess.random_state: 42
+        preprocess.stratify: false
+        preprocess.test_size: 0.2
+    outs:
+    - path: data/processed/test.csv
+      md5: 2aa393784a331d1ee569fc1b109b9367
+      size: 460114
+    - path: data/processed/train.csv
+      md5: 866d8ac7844aec0655b08767f9c54e6f
+      size: 1836057
+  train_model:
+    cmd: python src/training/train.py --config-path src/config/params.yml
+    deps:
+    - path: data/processed/test.csv
+      md5: 2aa393784a331d1ee569fc1b109b9367
+      size: 460114
+    - path: data/processed/train.csv
+      md5: 866d8ac7844aec0655b08767f9c54e6f
+      size: 1836057
+    - path: src/config/params.yml
+      md5: ee5c82cf53125491731c33357aa35a9b
+      size: 420
+    - path: src/training/train.py
+      md5: 050e3279f19afb0bd47c239394c2451b
+      size: 11315
+  save_model:
+    cmd: python src/training/save_model.py --model-path 
+      models/california_housing_model.pkl --config-path src/config/params.yml 
+      --output-dir api/models/saved_model
+    deps:
+    - path: src/config/params.yml
+      md5: ee5c82cf53125491731c33357aa35a9b
+      size: 420
+    - path: src/training/save_model.py
+      md5: e00b39580aa16e96de6131b10a28d7e1
+      size: 10206
+    outs:
+    - path: api/models/saved_models/california-housing-regressor_latest.pkl
+      md5: 9cbd47bb7750116af615bf3c39fd4955
+      size: 6049
+    - path: api/models/saved_models/california-housing-regressor_metadata.json
+      md5: 110a9ab6cdc3af133199c8005ee777ac
+      size: 560

@@ -1,9 +1,1 @@
-[core]
-    remote = s3remote
-['remote "s3remote"']
-    url = s3://my-local-test-bucket-12345/california_housing_dvc
-    endpointurl = http://localhost:4566
-    access_key_id = test
-    secret_access_key = test
-    region = us-east-1
-    use_ssl = false
+

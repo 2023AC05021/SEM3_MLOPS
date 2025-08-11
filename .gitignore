@@ -3,9 +3,12 @@ dvc_remote/
 
 data/notebooks/.ipynb_checkpoints
 data/processed
-data/raw
 data/interim/
 
+__pycache__
+__pycache__/
+.pytest_cache/
+src/utils
 
 # MLflow tracking and artifacts
 .mlflow/
@@ -25,4 +28,3 @@ src/utils/__pycache__/
 **/.terraform.lock.hcl
 **/terraform.tfstate
 **/terraform.tfstate.backup
-

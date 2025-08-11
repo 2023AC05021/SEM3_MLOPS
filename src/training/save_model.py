@@ -83,7 +83,7 @@ def download_and_save_model(model_name, model_version, save_dir, config):
         
         # Load the model from MLflow
         model = mlflow.sklearn.load_model(model_uri)
-        print(f"✅ Model loaded successfully from MLflow Registry")
+        print(f"Model loaded successfully from MLflow Registry")
         
         # Generate filename with timestamp and version
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -92,13 +92,13 @@ def download_and_save_model(model_name, model_version, save_dir, config):
         
         # Save model as PKL file using joblib
         joblib.dump(model, file_path)
-        print(f"✅ Model saved as PKL file: {file_path}")
+        print(f"Model saved as PKL file: {file_path}")
         
         # Also save a version without timestamp for easy access
         simple_filename = f"{model_name}_latest.pkl"
         simple_file_path = os.path.join(save_dir, simple_filename)
         joblib.dump(model, simple_file_path)
-        print(f"✅ Model also saved as: {simple_file_path}")
+        print(f"Model also saved as: {simple_file_path}")
         
         return file_path, simple_file_path
         
@@ -121,28 +121,28 @@ def verify_saved_model(pkl_file_path, X_test_sample=None):
     try:
         # Load the PKL model
         loaded_model = joblib.load(pkl_file_path)
-        print(f"✅ PKL model loaded successfully from: {pkl_file_path}")
+        print(f"PKL model loaded successfully from: {pkl_file_path}")
         
         # Check if model has predict method
         if hasattr(loaded_model, 'predict'):
-            print("✅ Model has predict method")
+            print("Model has predict method")
             
             # If sample data provided, test prediction
             if X_test_sample is not None:
                 try:
                     prediction = loaded_model.predict(X_test_sample)
-                    print(f"✅ Test prediction successful. Sample prediction: {prediction[0]:.4f}")
+                    print(f"Test prediction successful. Sample prediction: {prediction[0]:.4f}")
                 except Exception as e:
-                    print(f"⚠️  Prediction test failed: {e}")
+                    print(f"Prediction test failed: {e}")
                     return False
         else:
-            print("❌ Model does not have predict method")
+            print("Model does not have predict method")
             return False
         
         return True
         
     except Exception as e:
-        print(f"❌ Model verification failed: {str(e)}")
+        print(f"Model verification failed: {str(e)}")
         return False
 
 
@@ -172,10 +172,10 @@ def save_model_metadata(model_info, save_dir):
         with open(metadata_file, 'w') as f:
             json.dump(metadata, f, indent=2)
             
-        print(f"✅ Model metadata saved: {metadata_file}")
+        print(f"Model metadata saved: {metadata_file}")
         
     except Exception as e:
-        print(f"⚠️  Could not save metadata: {str(e)}")
+        print(f"Could not save metadata: {str(e)}")
 
 
 def main():
@@ -203,7 +203,7 @@ def main():
         print(f"\n🔍 Searching for latest version of model '{model_name}'...")
         model_info = get_latest_model_version(client, model_name)
         
-        print(f"✅ Found model:")
+        print(f"Found model:")
         print(f"   Name: {model_info['name']}")
         print(f"   Version: {model_info['version']}")
         print(f"   Stage: {model_info['stage']}")
@@ -215,9 +215,9 @@ def main():
         
         # Set up save directory
         project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-        save_dir = os.path.join(project_root, "models", "saved_models")
+        save_dir = os.path.join(project_root, "api/models", "saved_models")
         
-        print(f"\n💾 Saving model to: {save_dir}")
+        print(f"\nSaving model to: {save_dir}")
         
         # Download and save the model
         pkl_file_path, simple_file_path = download_and_save_model(
@@ -231,22 +231,22 @@ def main():
         save_model_metadata(model_info, save_dir)
         
         # Verify the saved model
-        print(f"\n🔬 Verifying saved model...")
+        print(f"\nVerifying saved model...")
         verification_success = verify_saved_model(pkl_file_path)
         
         if verification_success:
-            print(f"\n🎉 SUCCESS!")
+            print(f"\nSUCCESS!")
             print(f"   Model successfully downloaded and saved as PKL file")
             print(f"   Main file: {pkl_file_path}")
             print(f"   Quick access: {simple_file_path}")
             print(f"   Model is ready for deployment or further use!")
         else:
-            print(f"\n❌ VERIFICATION FAILED!")
+            print(f"\nVERIFICATION FAILED!")
             print(f"   Model was saved but verification failed")
             print(f"   Please check the saved file manually")
             
     except Exception as e:
-        print(f"\n❌ ERROR: {str(e)}")
+        print(f"\nERROR: {str(e)}")
         print("Make sure:")
         print("1. MLflow server is running at http://127.0.0.1:5000")
         print("2. The model has been trained and registered")
@@ -266,7 +266,7 @@ def save_specific_version(model_name, version):
     
     # Set up save directory
     project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-    save_dir = os.path.join(project_root, "models", "saved_models")
+    save_dir = os.path.join(project_root, "api/models", "saved_models")
     
     # Load config for consistency
     config_path = os.path.join(os.path.dirname(__file__), '..', 'config', 'params.yml')

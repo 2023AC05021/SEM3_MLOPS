@@ -100,7 +100,7 @@ def load_data(input_path):
         pd.DataFrame: Loaded dataset
     """
     try:
-        df = pd.read_csv(input_path, index_col=0)
+        df = pd.read_csv(input_path)
         print(f"📊 Data loaded successfully: {df.shape[0]:,} rows × {df.shape[1]} columns")
         return df
     except Exception as e:
@@ -134,12 +134,12 @@ def engineer_features(df):
     
     # Validate the new feature
     if df_processed['rooms_per_person'].isnull().any():
-        print("⚠️  Warning: NaN values detected in rooms_per_person feature")
+        print("Warning: NaN values detected in rooms_per_person feature")
         # Handle NaN values if any
         df_processed['rooms_per_person'].fillna(df_processed['rooms_per_person'].median(), inplace=True)
     
-    print(f"✅ Feature engineering completed. New shape: {df_processed.shape}")
-    print(f"📈 Created features: rooms_per_person")
+    print(f"Feature engineering completed. New shape: {df_processed.shape}")
+    print(f"Created features: rooms_per_person")
     print(f"   - Mean: {df_processed['rooms_per_person'].mean():.3f}")
     print(f"   - Median: {df_processed['rooms_per_person'].median():.3f}")
     print(f"   - Range: {df_processed['rooms_per_person'].min():.3f} - {df_processed['rooms_per_person'].max():.3f}")
@@ -174,7 +174,7 @@ def split_data(df, test_size=0.2, random_state=42, stratify=False):
     Returns:
         tuple: (X_train, X_test, y_train, y_test)
     """
-    print(f"🔄 Splitting data (train: {1-test_size:.0%}, test: {test_size:.0%})...")
+    print(f"Splitting data (train: {1-test_size:.0%}, test: {test_size:.0%})...")
     
     # Separate features and target
     X = df.drop('target', axis=1)
@@ -185,9 +185,9 @@ def split_data(df, test_size=0.2, random_state=42, stratify=False):
     if stratify:
         try:
             stratify_labels = create_stratification_groups(y)
-            print("📊 Using stratified sampling based on target quartiles")
+            print("Using stratified sampling based on target quartiles")
         except Exception as e:
-            print(f"⚠️  Warning: Could not create stratification groups: {e}")
+            print(f" Warning: Could not create stratification groups: {e}")
             print("   Proceeding with random sampling")
     
     # Perform train/test split
@@ -199,7 +199,7 @@ def split_data(df, test_size=0.2, random_state=42, stratify=False):
             stratify=stratify_labels
         )
         
-        print(f"✅ Data split completed:")
+        print(f"Data split completed:")
         print(f"   - Training set: {X_train.shape[0]:,} samples")
         print(f"   - Test set: {X_test.shape[0]:,} samples")
         print(f"   - Features: {X_train.shape[1]} columns")
@@ -222,7 +222,7 @@ def create_output_directory(output_path):
         output_path (str): Path to output directory
     """
     Path(output_path).mkdir(parents=True, exist_ok=True)
-    print(f"📁 Output directory ready: {output_path}")
+    print(f"Output directory ready: {output_path}")
 
 
 def save_processed_data(train_df, test_df, output_path):
@@ -242,14 +242,14 @@ def save_processed_data(train_df, test_df, output_path):
         test_path = os.path.join(output_path, 'test.csv')
         
         # Save datasets
-        train_df.to_csv(train_path, index=True)
-        test_df.to_csv(test_path, index=True)
+        train_df.to_csv(train_path, index=False)
+        test_df.to_csv(test_path, index=False)
         
         # Verify files were created and get their sizes
         train_size = os.path.getsize(train_path)
         test_size = os.path.getsize(test_path)
         
-        print(f"✅ Datasets saved successfully:")
+        print(f"Datasets saved successfully:")
         print(f"   - Training data: {train_path} ({train_size:,} bytes)")
         print(f"   - Test data: {test_path} ({test_size:,} bytes)")
         
@@ -268,7 +268,7 @@ def print_data_summary(train_df, test_df):
         test_df (pd.DataFrame): Testing dataset
     """
     print("\n" + "="*60)
-    print("📋 DATA PROCESSING SUMMARY")
+    print("DATA PROCESSING SUMMARY")
     print("="*60)
     
     print(f"Training Set:")
@@ -337,11 +337,11 @@ def main():
         # Print summary
         print_data_summary(train_df, test_df)
         
-        print(f"\n🎉 Data preprocessing completed successfully!")
+        print(f"\nData preprocessing completed successfully!")
         print(f"Output files: {train_path}, {test_path}")
         
     except Exception as e:
-        print(f"❌ Error in preprocessing pipeline: {str(e)}")
+        print(f"Error in preprocessing pipeline: {str(e)}")
         sys.exit(1)
 
 

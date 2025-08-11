@@ -79,7 +79,7 @@ def load_data(input_path):
         pd.DataFrame: Loaded dataset
     """
     try:
-        df = pd.read_csv(input_path, index_col=0)
+        df = pd.read_csv(input_path)
         print(f"Data loaded successfully: {df.shape[0]:,} rows × {df.shape[1]} columns")
         return df
     except Exception as e:
@@ -142,17 +142,17 @@ def save_engineered_data(df, output_path):
         df (pd.DataFrame): Feature-engineered dataset
         output_path (str): Output file path
     """
-    print("Saving feature-engineered dataset...")
+    print("Saving feature-engineered dataset... ")
     
     try:
-        df.to_csv(output_path, index=True)
+        df.to_csv(output_path, index=False)
         
         # Verify file was created and get its size
         file_size = os.path.getsize(output_path)
         
         print(f"Feature-engineered dataset saved: {output_path}")
         print(f"   - File size: {file_size:,} bytes")
-        print(f"   - Shape: {df.shape}")
+        print(f"   - Shape: {df.shape} ")
         
         return output_path
         
