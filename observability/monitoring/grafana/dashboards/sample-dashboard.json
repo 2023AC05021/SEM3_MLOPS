@@ -1,0 +1,42 @@
+{
+  "id": null,
+  "uid": null,
+  "title": "FastAPI Simple Metrics",
+  "timezone": "browser",
+  "schemaVersion": 36,
+  "version": 1,
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Prediction Requests / sec",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "targets": [
+        { "expr": "rate(prediction_requests_total[1m])", "legendFormat": "Requests/sec", "refId": "A" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Successful Predictions / sec",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "targets": [
+        { "expr": "rate(successful_predictions_total[1m])", "legendFormat": "Success/sec", "refId": "A" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "GC Objects Collected",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "targets": [
+        { "expr": "python_gc_objects_collected_total", "legendFormat": "Gen {{generation}}", "refId": "A" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Memory Usage (MB)",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "targets": [
+        { "expr": "process_resident_memory_bytes / 1024 / 1024", "legendFormat": "RSS MB", "refId": "A" }
+      ]
+    }
+  ]
+}
