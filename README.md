@@ -5,6 +5,14 @@ This repository demonstrates a complete MLOps workflow for the California Housin
 
 ---
 
+## MLOps Assignment - Group 10
+- Shaik Asief Hussain - 2023ac05021
+- BHOIRA MARIYAM YUSUF - 2023ac05328
+- MOHAMMED FAISEL SAIT - 2023aa05525
+- KHUNZA MERAJ - 2023ad05120
+
+---
+
 ## System Architecture
 
 **System flow is illustrated in [`mlops-flow-diagram.md`](mlops-flow-diagram.md)** (Mermaid diagram).
