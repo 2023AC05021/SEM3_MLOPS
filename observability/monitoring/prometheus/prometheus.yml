@@ -1,0 +1,19 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'local-app'
+    static_configs:
+      - targets:
+          # The script will manage the effective targets using relabeling below.
+          - host.docker.internal:8000
+          - host.containers.internal:8000
+          - california-housing-api:8000
+    relabel_configs:
+      # Drop targets that are not resolvable/reachable by attempting a lightweight check via blackbox-like approach is not available natively.
+      # Instead, we keep all targets but rely on Prometheus UI/targets for visibility; we also prefer to surface notes on host-mapping below.
+      # For portability and simplicity, no dynamic drop is used here.
+      # You can manually comment out non-working targets if needed.
+      - source_labels: [__address__]
+        target_label: instance
+
