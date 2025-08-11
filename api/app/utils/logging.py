@@ -18,7 +18,7 @@ from pathlib import Path
 
 SERVICE_NAME = os.getenv("SERVICE_NAME", "california_housing_api")
 APP_ENV = os.getenv("APP_ENV", os.getenv("ENV", "production"))
-base_path = Path(os.path.join(os.getcwd(), "api", "logs"))
+base_path = Path(os.path.join(os.getcwd(), "logs"))
 LOG_DIR = os.getenv("LOG_DIR", base_path)
 LOG_FILE = os.path.join(LOG_DIR, "app.log")
 LOG_ROTATION = os.getenv("LOG_ROTATION", "size")  # "size" or "time"
